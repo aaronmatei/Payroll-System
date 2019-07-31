@@ -15,4 +15,3 @@ class Production (Config):
     SQLALCHEMY_DATABASE_URI = 'postgres://my_company:29094964@192.0.10.1:5432/payroll'
     DEBUG = False
     environment = 'Production'
-

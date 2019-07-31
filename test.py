@@ -1,12 +1,7 @@
-def simpleArraySum(ar):
-    #
-    # Write your code here.
-    # ar_count = int(input())
-    result=0
-    for i in range (len(ar)):
-         result+=ar[i]
-        # i+=1
-        #  print(i)
-    return result
-
-print("The sum of numbers in the array is : {}".format(simpleArraySum([1,2,4,6,9])))
+def getMinimumCost(n,k, c):
+    cost = 0
+    c = sorted(c, reverse=True)
+    for i in range(0, n):
+        cost += (i // k + 1) * c[i]
+    return cost
+print(getMinimumCost(5,3,[1,3,5,7,9]))

@@ -19,6 +19,7 @@ def createTables():
 # registering a route
 @app.route('/')
 # when this route is visited, launch this method
+
 def home():
     return render_template('flask.html')
 
