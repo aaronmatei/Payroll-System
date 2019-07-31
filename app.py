@@ -23,6 +23,13 @@ def createTables():
 def home():
     return render_template('flask.html')
 
+@app.route('/newDepartment', methods=['POST'])
+def newDepartment():
+    pass
+@app.route('/newEmployee', methods=['POST'])
+def newEmployee():
+    pass
+
 # run flask
 # if __name__ == '__main__':
 #     app.run()
