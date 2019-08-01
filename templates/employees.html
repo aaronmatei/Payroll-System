@@ -70,12 +70,7 @@
     </nav>
 </div>
 <div class="bs-example">
-    <div class="bs-example">
-        <!-- Button trigger modal for Department-->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newDepartment">
-            Add a new department
-        </button>
-    </div>
+
     <div class="bs-example">
         <!-- Button trigger modal for Employee-->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newEmployee">
@@ -83,38 +78,6 @@
         </button>
     </div>
 
-    <!-- Modal for adding Department-->
-    <div class="modal fade" id="newDepartment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add department details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="/newDepartment" , method="post">
-                        <div class="form-group">
-                            <label for="formGroupExampleInput">Department Name</label>
-                            <input name="department" required type="text" class="form-control"
-                                   id="formGroupExampleInput"
-                                   placeholder="e.g. ICT">
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="form-control btn-primary">
-                        </div>
-
-                    </form>
-                </div>
-                <!-- <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>-->
-            </div>
-        </div>
-    </div>
 
     <!-- Modal for adding Employee-->
     <div class="modal fade" id="newEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -142,7 +105,7 @@
                         <div class="form-group">
                             <label for="formGroupExampleInput">Gender</label>
                             <select name="gender" required class="form-control"
-                                   id="formGroupExampleInput">
+                                    id="formGroupExampleInput">
                                 <option value="m">Male</option>
                                 <option value="f">Female</option>
                                 <option value="na">N/A</option>
@@ -207,6 +170,7 @@
         </div>
     </div>
 </div>
+</div>
 
 <div class="bs-example">
 
@@ -219,19 +183,17 @@
         </tr>
         </thead>
 
-        <tbody>
+        <!--<tbody>
         {% for each in departments %}
 
-            <tr>
-                <th scope="row">{{ each.id }}</th>
-                <td>{{ each.dpt_name }}</td>
-                <td>
-                    <button><a href="/employees/{{ each.id }}">View employees</a></button>
-                </td>
-            </tr>
+        <tr>
+            <th scope="row">{{ each.id }}</th>
+            <td>{{ each.dpt_name }}</td>
+        <td><button><a href="/employees/{{ each.id }}">View employees</a> </button></td>
+        </tr>
         {% endfor %}
 
-        </tbody>
+        </tbody> -->
     </table>
 </div>
 
@@ -244,4 +206,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
-</html>                            
+</html>
