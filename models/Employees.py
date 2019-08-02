@@ -19,8 +19,8 @@ class EmployeeModel(db.Model):
         db.session.commit()
      #reading
     @classmethod
-    def fetch_by_name(cls,name):
-        return cls.query.filter_by(first_name=name).first()
+    def fetch_by_id(cls,id):
+        return cls.query.filter_by(national_id=id).first()
     @classmethod
     def fetch_all(cls):
         return cls.query.all()
