@@ -1,13 +1,15 @@
 # importing Flask class
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
-from config import Development,Testing
+from config import Development,Testing,Production
 from flask_migrate import Migrate, Manager, MigrateCommand
 
 # instantiating Flask class with instance/object app
 app = Flask(__name__)
 app.config.from_object(Development)
+#app.config.from_object(Production)
 # app.config.from_object(Testing)
+
 db = SQLAlchemy(app)
 migrate = Migrate(app,db)
 
