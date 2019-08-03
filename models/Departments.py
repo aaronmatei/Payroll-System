@@ -1,4 +1,4 @@
-from app import db
+from main import db
 from models.Employees import EmployeeModel
 class DepartmentModel(db.Model):
     __tablename__ = 'departments'
@@ -14,6 +14,7 @@ class DepartmentModel(db.Model):
     @classmethod
     def fetch_by_name(cls,name):
         return cls.query.filter_by(dpt_name=name).first()
+
     @classmethod
     def fetch_all(cls):
         return cls.query.all()

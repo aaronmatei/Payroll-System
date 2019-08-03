@@ -35,6 +35,7 @@ def home():
 def employees():
     departments = DepartmentModel.fetch_all()
     employees = EmployeeModel.fetch_all()
+
     return render_template('employees.html', departments= departments, employees=employees)
 
 @app.route('/departments')
@@ -59,25 +60,23 @@ def newDepartment():
 @app.route('/newEmployee', methods=['POST'])
 def newEmployee():
 
-    # employee_national_id = request.form['employee']
-    #     # if EmployeeModel.fetch_by_name(employee_national_id):
-    #     #     flash("That user "+ employee_national_id+ " already added")
-
-
     first_name = request.form['first_name']
     second_name = request.form['second_name']
     gender = request.form['gender']
     national_id = request.form['national_id']
     kra_pin = request.form['kra_pin']
     email = request.form['email']
-    #departmentID = request.form['dpt_name']
+    departmentID = request.form['dpt_name']
     basic_salary = request.form['basic_salary']
     allowances = request.form['allowances']
     other_deductions = request.form['other_deductions']
 
+    if EmployeeModel.fetch_by_id(national_id):
+        flash("That user with national id no " + national_id + " already added")
+
 
     employee = EmployeeModel(first_name=first_name,second_name=second_name,gender=gender,
-                             national_id=national_id,kra_pin=kra_pin,email=email,
+                             national_id=national_id,kra_pin=kra_pin,email=email,departmentID=departmentID,
                              basic_salary = basic_salary,allowances=allowances,other_deductions=other_deductions )
     employee.instert_into_database()
 

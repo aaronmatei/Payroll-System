@@ -1,4 +1,4 @@
-from app import db
+from main import db
 class PayrollModel(db.Model):
     __tablename__ = 'payrolls'
     id = db.Column(db.Integer, primary_key=True)

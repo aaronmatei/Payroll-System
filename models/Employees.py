@@ -1,4 +1,4 @@
-from app import db
+from main import db
 class EmployeeModel(db.Model):
     __tablename__ = 'employees'
     id = db.Column(db.Integer, primary_key=True)
@@ -21,6 +21,9 @@ class EmployeeModel(db.Model):
     @classmethod
     def fetch_by_id(cls,id):
         return cls.query.filter_by(national_id=id).first()
+    @classmethod
+    def fetch_by_dptid(cls, department_id):
+        return cls.query.filter_by(departmentID=department_id)
     @classmethod
     def fetch_all(cls):
         return cls.query.all()
