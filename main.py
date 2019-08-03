@@ -6,8 +6,8 @@ from flask_migrate import Migrate, Manager, MigrateCommand
 
 # instantiating Flask class with instance/object app
 app = Flask(__name__)
-#app.config.from_object(Development)
-app.config.from_object(Production)
+app.config.from_object(Development)
+# app.config.from_object(Production)
 # app.config.from_object(Testing)
 
 db = SQLAlchemy(app)
@@ -50,6 +50,7 @@ def departments():
 @app.route('/newDepartment', methods=['POST'])
 def newDepartment():
     department_name = request.form['department']
+
     if DepartmentModel.fetch_by_name(department_name):
         flash(department_name + " already exists")
         return redirect(url_for('departments'))
@@ -75,6 +76,7 @@ def newEmployee():
 
     if EmployeeModel.fetch_by_id(national_id):
         flash("That user with national id no " + national_id + " already added")
+        return redirect(url_for('employees'))
 
 
     employee = EmployeeModel(first_name=first_name,second_name=second_name,gender=gender,
