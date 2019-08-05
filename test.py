@@ -1,7 +1,9 @@
-def getMinimumCost(n,k, c):
-    cost = 0
-    c = sorted(c, reverse=True)
-    for i in range(0, n):
-        cost += (i // k + 1) * c[i]
-    return cost
-print(getMinimumCost(5,3,[1,3,5,7,9]))
+from datetime import datetime
+birthday = datetime(1992, 11, 22, 9, 30, 45)
+print(birthday.day)
+print(birthday.month)
+print(birthday.date())
+print(birthday.hour)
+print(birthday.weekday())
+print(birthday.now())
+

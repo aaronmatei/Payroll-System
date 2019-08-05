@@ -30,21 +30,27 @@ def createTables():
 # when this route is visited, launch this method
 
 def home():
-    departments = DepartmentModel.fetch_all()
-    return render_template('index.html',departments= departments)
+    return render_template('index.html')
 
-@app.route('/employees')
-def employees():
+@app.route('/employees/<int:dpt_id>')
+def employees(dpt_id):
     departments = DepartmentModel.fetch_all()
-    employees = EmployeeModel.fetch_all()
+    #employees = EmployeeModel.fetch_all()
+    this_department = DepartmentModel.fetch_by_id(dpt_id)
+    employees = this_department.employees
+    dept_id = dpt_id
 
-    return render_template('employees.html', departments= departments, employees=employees)
+    return render_template('employees.html', departments= departments, employees=employees, dept_id=dept_id)
 
 @app.route('/departments')
 def departments():
     employees = EmployeeModel.fetch_all()
     departments = DepartmentModel.fetch_all()
     return render_template('departments.html', employees= employees, departments=departments)
+@app.route('/payrolls/<int:id>')
+def payrolls(id):
+    this_employee = EmployeeModel.fetch_by_id(id)
+    return render_template('payrolls.html', employees = this_employee)
 
 
 @app.route('/newDepartment', methods=['POST'])
@@ -69,7 +75,7 @@ def newEmployee():
     national_id = request.form['national_id']
     kra_pin = request.form['kra_pin']
     email = request.form['email']
-    departmentID = request.form['dpt_name']
+    departmentID = int(request.form['dpt_name'])
     basic_salary = request.form['basic_salary']
     allowances = request.form['allowances']
     other_deductions = request.form['other_deductions']
@@ -84,7 +90,7 @@ def newEmployee():
                              basic_salary = basic_salary,allowances=allowances,other_deductions=other_deductions )
     employee.instert_into_database()
 
-    return redirect(url_for('employees'))
+    return redirect(url_for('employees',dpt_id=departmentID))
 
 
 

@@ -21,9 +21,7 @@ class EmployeeModel(db.Model):
     @classmethod
     def fetch_by_id(cls,id):
         return cls.query.filter_by(national_id=id).first()
-    @classmethod
-    def fetch_by_dptid(cls, department_id):
-        return cls.query.filter_by(departmentID=department_id)
+
     @classmethod
     def fetch_all(cls):
         return cls.query.all()

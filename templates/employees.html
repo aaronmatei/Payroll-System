@@ -62,12 +62,8 @@
 
                             </div>
                             <div class="form-group">
-                                <label for="formGroupExampleInput">Department</label>
-                                <select name="dpt_name" required type="text" class="form-control">
-                                    {% for each in departments %}
-                                        <option value="{{ each.id }}">{{ each.dpt_name }}</option>
-                                    {% endfor %}
-                                </select>
+
+                                <input name="dpt_name" type="hidden" class="form-control" value="{{ dept_id }}">
                             </div>
                             <div class="form-group">
                                 <label for="formGroupExampleInput">Basic Salary</label>
@@ -141,7 +137,7 @@
                     <td>{{ each.allowances }}</td>
                     <td>{{ each.other_deductions }}</td>
                     <td>
-                        <button><a href="/departments">View department</a></button>
+                        <button><a href="/payrolls/{{ each.id }}">View Payroll</a></button>
                     </td>
                 </tr>
             {% endfor %}
