@@ -1,74 +1,59 @@
 {% extends "layout.html" %}
 {% block content %}
 
+
     <div class="bs-example">
-        <div class="bs-example">
-            <!-- Button trigger modal for Department-->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newDepartment">
-                Check payroll
-            </button>
-        </div>
-        <!-- Modal for adding Department-->
-        <div class="modal fade" id="newDepartment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add department details</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/newDepartment" , method="post">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput">Department Name</label>
-                                <input name="department" required type="text" class="form-control"
-                                       id="formGroupExampleInput"
-                                       placeholder="e.g. ICT">
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" class="form-control btn-primary">
-                            </div>
 
-                        </form>
-                    </div>
-                    <!-- <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>-->
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-<div class="bs-example">
-
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">Department ID</th>
-            <th scope="col">Department name</th>
-            <th scope="col">Employees</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        {% for each in departments %}
-
+        <table class="table">
+            <thead class="thead-dark">
             <tr>
-                <th scope="row">{{ each.id }}</th>
-                <td>{{ each.dpt_name }}</td>
-                <td>
-                    <button><a href="/employees/{{ each.id }}">View employees</a></button>
-                </td>
+                <th scope="col">Payroll ID</th>
+                <th scope="col">Employee ID</th>
+                <th scope="col">Department Name</th>
+                <th scope="col">Month</th>
+                <th scope="col">Gross Salary</th>
+                <th scope="col">NSSF Deductions</th>
+                <th scope="col">NHIF Deductions</th>
+                <th scope="col">Taxable income</th>
+                <th scope="col">PAYE</th>
+                <th scope="col">Overtime</th>
+                <th scope="col">Salary Advance</th>
+                <th scope="col">Other Deductions</th>
+                <th scope="col">Net Salary</th>
+                <th scope="col"></th>
+
+
             </tr>
-        {% endfor %}
+            </thead>
 
-        </tbody>
-    </table>
-</div>
+            <tbody>
+
+            {% for each in this_payroll_employee.emp_payrolls %}
+                <tr>
+                    <th scope="row">{{ each.id }}</th>
+                    <td>{{ each.employee_id }}</td>
+                    <td>{{ each.dept_name }}</td>
+                    <td>{{ each.payroll_month }}</td>
+                    <td>{{ each.gross_salary }}</td>
+                    <td>{{ each.nssf_deductions }}</td>
+                    <td>{{ each.nhif_deductions }}</td>
+                    <td>{{ each.taxable_income }}</td>
+                    <td>{{ each.PAYE }}</td>
+                    <td>{{ each.overtime }}</td>
+                    <td>{{ each.salary_advance }}</td>
+                    <td>{{ each.other_deductions }}</td>
+                    <td>{{ each.net_salary }}</td>
+                    <td>
+                       <a href="" class="btn btn-success btn-lg">
+                            <span class="glyphicon glyphicon-print"></span> Print Payslip
+                        </a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
-
 

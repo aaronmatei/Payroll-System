@@ -21,13 +21,11 @@ class Payroll:
     total_deductions = 0.00
     net_salary = 0.00
 
-    def __init__(self,emp_name,KRA_PIN,id_number,basic_salary,allowances,other_deductions):
+    def __init__(self,emp_name,basic_salary,allowances):
         self.emp_name = emp_name
-        self.KRA_PIN = KRA_PIN
-        self.id_number = id_number
         self.basic_salary= basic_salary
         self.allowances = allowances
-        self.other_deductions = other_deductions
+
         # Payroll.pension(self)
         Payroll.grossSalary(self)
         Payroll.nssfDeductions(self)
