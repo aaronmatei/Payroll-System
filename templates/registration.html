@@ -24,54 +24,71 @@
             <p class="divider-text">
                 <span class="bg-light">OR</span>
             </p>
-            <form>
+            <form action="/newUser" method="post">
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                     </div>
-                    <input name="" class="form-control" placeholder="Full name" type="text">
-                </div> <!-- form-group// -->
+                    <input name="first_name" class="form-control" placeholder="First Name" type="text">
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    </div>
+                    <input name="second_name" class="form-control" placeholder="Second Name" type="text">
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    </div>
+                    <select name="gender" class="form-control">
+                        <option value="m">Male</option>
+                        <option value="f">Female</option>
+                        <option value="na">N/A</option>
+                    </select>
+                </div>
+                <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                     </div>
-                    <input name="" class="form-control" placeholder="Email address" type="email">
+                    <input name="email" class="form-control" placeholder="Email address" type="email">
+                </div>
+                <!-- form-group// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                    </div>
+                    <input name="phone" class="form-control" placeholder="Phone number" type="text">
                 </div> <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
                     </div>
-                    <select class="custom-select" style="max-width: 120px;">
-                        <option selected="">+971</option>
-                        <option value="1">+972</option>
-                        <option value="2">+198</option>
-                        <option value="3">+701</option>
-                    </select>
-                    <input name="" class="form-control" placeholder="Phone number" type="text">
-                </div> <!-- form-group// -->
+                    <input name="national_id" class="form-control" placeholder="National ID" type="text">
+                </div>
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                        <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
                     </div>
-                    <select class="form-control">
-                        <option selected=""> Select Department</option>
-                        <option>Designer</option>
-                        <option>Manager</option>
-                        <option>Accaunting</option>
-                    </select>
-                </div> <!-- form-group end.// -->
+                    <input name="kra_pin" class="form-control" placeholder="KRA PIN" type="text">
+                </div>
+
+                <!-- form-group end.// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    <input class="form-control" placeholder="Create password" type="password">
-                </div> <!-- form-group// -->
+                    <input name="password" class="form-control" placeholder="Create password" type="password">
+                </div>
+                <!-- form-group// -->
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    <input class="form-control" placeholder="Repeat password" type="password">
-                </div> <!-- form-group// -->
+                    <input name="password2" class="form-control" placeholder="Repeat password" type="password">
+                </div>
+                <!-- form-group// -->
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block"> Create Account</button>
                 </div> <!-- form-group// -->

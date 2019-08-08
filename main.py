@@ -1,9 +1,17 @@
 # importing Flask class
+
+import bcrypt as bcrypt
 from flask import Flask, render_template, request, redirect, url_for, flash
+from flask_login import login_manager, login_user
 from flask_sqlalchemy import SQLAlchemy
 from config import Development,Testing,Production
 from flask_migrate import Migrate, Manager, MigrateCommand
 from resources.payroll import Payroll
+
+
+
+
+
 
 # instantiating Flask class with instance/object app
 
@@ -15,6 +23,7 @@ app.config.from_object(Development)
 
 db = SQLAlchemy(app)
 migrate = Migrate(app,db)
+
 
 # manager = Manager(app)
 # manager.add_command('db',MigrateCommand)
@@ -39,17 +48,35 @@ def home():
 @app.route('/registration')
 def registration():
     return render_template('registration.html')
-@app.route('/login')
+
+@app.route('/login',methods=['POST','GET'])
 def login():
-    return render_template('login.html')
+#     print (db)
+#     # form = LoginForm()
+#     if form.validate_on_submit():
+#         user = UserModel.fetch_all()
+#         password = request.form['password']
+#         if user:
+#             if bcrypt.check_password_hash(user.password, password):
+#                 user.authenticated = True
+#                 db.session.add(user)
+#                 db.session.commit()
+#                 login_user(user, remember=True)
+#                 return redirect(url_for("home"))
+    return render_template("login.html")
+
+
+@app.route("/logout", methods=["GET"])
+
 
 @app.route('/employees/<int:dpt_id>')
 def employees(dpt_id):
 
     this_department = DepartmentModel.fetch_by_id(dpt_id)
     # employees = this_department.employees
+    departments = DepartmentModel.fetch_all()
 
-    return render_template('employees.html', this_department=this_department)
+    return render_template('employees.html', this_department=this_department,departments=departments)
 
 @app.route('/departments')
 def departments():
@@ -61,9 +88,9 @@ def departments():
 def payrolls(emp_id):
     # this_employee = EmployeeModel.fetch_by_id(emp_id)
     # emp_payroll = PayrollsModel.fetch_all()
-    this_payroll_employee = PayrollsModel.fetch_by_id(emp_id)
+    this_employee = EmployeeModel.fetch_by_id(emp_id)
 
-    return render_template('payrolls.html', this_payroll_employee=this_payroll_employee)
+    return render_template('payrolls.html', this_employee=this_employee)
 
 @app.route('/newPayroll/<emp_id>', methods=['POST'])
 def newPayroll(emp_id):
@@ -138,7 +165,7 @@ def newEmployee():
     departmentID = int(request.form['dpt_name'])
     basic_salary = request.form['basic_salary']
     allowances = request.form['allowances']
-    other_deductions = request.form['other_deductions']
+
 
     if EmployeeModel.fetch_by_id(national_id):
         flash("That user with national id no " + national_id + " already added")
@@ -147,11 +174,42 @@ def newEmployee():
 
     employee = EmployeeModel(first_name=first_name,second_name=second_name,gender=gender,
                              national_id=national_id,kra_pin=kra_pin,email=email,departmentID=departmentID,
-                             basic_salary = basic_salary,allowances=allowances,other_deductions=other_deductions )
+                             basic_salary = basic_salary,allowances=allowances)
     employee.instert_into_database()
 
     return redirect(url_for('employees',dpt_id=departmentID))
 
+@app.route('/editEmployee/<int:id>', methods=['POST'])
+def editEmployee(id):
+    first_name = request.form['first_name']
+    second_name = request.form['second_name']
+    gender = request.form['gender']
+    national_id = request.form['national_id']
+    kra_pin = request.form['kra_pin']
+    email = request.form['email']
+    departmentID = int(request.form['dpt_name'])
+    basic_salary = request.form['basic_salary']
+    allowances = request.form['allowances']
+
+    if gender == "na":
+        gender=None
+    if departmentID == "0":
+        departmentID=None
+
+    EmployeeModel.update_by_id(id=id,first_name=first_name,second_name=second_name,gender=gender,national_id=national_id,
+                               kra_pin=kra_pin,email=email,departmentID=departmentID,basic_salary=basic_salary,allowances=allowances)
+    this_emp = EmployeeModel.fetch_by_id(emp_id=id)
+    this_dept = this_emp.department
+
+    return redirect(url_for('employees',dpt_id=this_dept.id))
+
+@app.route('/deleteEmployee/<int:id>')
+def deleteEmployee(id):
+    this_emp = EmployeeModel.fetch_by_id(emp_id=id)
+    this_dept = this_emp.department
+    EmployeeModel.delete_by_id(id=id)
+
+    return redirect(url_for('employees',dpt_id=this_dept.id))
 
 
 # run flask
